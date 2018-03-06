@@ -1,0 +1,5 @@
+name = Faculty Publication Bundle
+
+core = 7.x
+
+stylesheets[screen][] = css/cu-faculty-publication-bundle.css

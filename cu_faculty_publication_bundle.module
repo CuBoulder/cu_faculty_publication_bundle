@@ -1,0 +1,45 @@
+<?php
+
+function cu_faculty_publication_bundle_block_info() {
+  $blocks['publications_by_faculty'] = array(
+    'info' => t('Publications by Faculty Member'),
+  );
+  return $blocks;
+}
+
+function cu_faculty_publication_bundle_block_view($delta = '') {
+  $block = array();
+  if ($delta =='publications_by_faculty') {
+
+    $block['subject'] = 'Example Faculty Publication Block';
+    //$block['content']['publications']['#markup'] = 'content goes here.';
+
+    $json = file_get_contents(drupal_get_path('module', 'cu_faculty_publication_bundle') . '/data/example.json');
+    $publications = json_decode($json);
+    //dpm($publications);
+    foreach ($publications->hits->hits as $listing) {
+      dpm($listing);
+      $contents = (array) $listing->_source;
+      $block['content']['publications'][]['#markup'] = theme('faculty_publication_name', $contents);
+    }
+
+  }
+  return $block;
+}
+
+function cu_faculty_publication_bundle_theme(&$existing, $type, $theme, $path) {
+  $registry = array();
+  $template_dir = drupal_get_path('module', 'cu_faculty_publication_bundle') . '/templates';
+  $registry['faculty_publication_author'] = array(
+    'template' => 'faculty-publication-author',
+    'path' => $template_dir,
+    'render element' => 'elements',
+  );
+  $registry['faculty_publication_name'] = array(
+    'template' => 'faculty-publication-name',
+    'path' => $template_dir,
+    'render element' => 'elements',
+  );
+
+  return $registry;
+}
