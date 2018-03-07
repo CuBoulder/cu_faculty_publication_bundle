@@ -16,9 +16,8 @@ function cu_faculty_publication_bundle_block_view($delta = '') {
 
     $json = file_get_contents(drupal_get_path('module', 'cu_faculty_publication_bundle') . '/data/example.json');
     $publications = json_decode($json);
-    //dpm($publications);
+
     foreach ($publications->hits->hits as $listing) {
-      dpm($listing);
       $contents = (array) $listing->_source;
       $block['content']['publications'][]['#markup'] = theme('faculty_publication_name', $contents);
     }
