@@ -8,7 +8,16 @@
     print ' ' . $publicationYear;
   ?></h3>
   <div class="faculty-publication-name">
-    <?php print l($name, 'https://doi.org/' . $doi); ?>
+    <?php
+    
+      if ($doi) {
+        print l($name, 'https://doi.org/' . $doi); 
+      }
+      else {
+        print l($name, 'https://scholar.google.com/scholar?hl=en&as_sdt=0%2C6&q=' . $doi); 
+      }
+    ?>
+
   </div>
   <div class="faculty-publication-pub-name">
     <?php print $publishedIn->name; ?>

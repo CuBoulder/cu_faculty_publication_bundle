@@ -13,8 +13,17 @@ function cu_faculty_publication_bundle_block_view($delta = '') {
 
     $block['subject'] = 'Example Faculty Publication Block';
     //$block['content']['publications']['#markup'] = 'content goes here.';
-
-    $json = file_get_contents(drupal_get_path('module', 'cu_faculty_publication_bundle') . '/data/example.json');
+    $node = menu_get_object();
+    dpm($node);
+    $id = $node->field_fis_id[LANGUAGE_NONE][0]['value'];
+    // $json = file_get_contents(drupal_get_path('module', 'cu_faculty_publication_bundle') . '/data/example.json');
+    $es_data = curl_init();
+    curl_setopt($es_data, CURLOPT_URL, 'https://experts.colorado.edu/es/webex-rc1/_search?q=authors.uri:experts.colorado.edu/display/fisid_'.$id);
+    curl_setopt($es_data, CURLOPT_RETURNTRANSFER,true);
+    curl_setopt($es_data, CURLOPT_HEADER, false); 
+    
+    $json = curl_exec($es_data);
+    curl_close($es_data);
     $publications = json_decode($json);
 
     foreach ($publications->hits->hits as $listing) {
