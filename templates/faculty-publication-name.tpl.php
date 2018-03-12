@@ -1,3 +1,12 @@
+<!-- 
+The publication first, publications template.
+
+Publication name
+Author, Publication Year
+Published in
+DOI: xx.xxxx/xxxxxxx.xxxxxxxx 
+-->
+
 <div class="faculty-publication-listing">
   <h3>
     <?php
