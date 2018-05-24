@@ -1,5 +1,5 @@
 name = Faculty Publication Bundle
-description = "The cu_alumni_class_notes_bundle adds a new block type to display faculty research publications."
+description = "Adds a new block type to display faculty research publications."
 version = 7.x-1.1
 core = 7.x
 project = cu_faculty_publication_bundle
